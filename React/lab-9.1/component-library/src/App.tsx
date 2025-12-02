@@ -21,7 +21,7 @@ function App() {
     {
       id: '1',
       name: 'Amanda',
-      email: 'amanda@example.com',
+      email: '',
       role: 'Admin',
       avatarUrl: '',
     },
@@ -84,7 +84,9 @@ function App() {
   };
 
   return (
-    <div className="p-4 space-y-6 w-full max-w-4xl mx-auto">
+  <div className="app-container">
+
+    <div className="space-y-4 mb-6">
       {alerts.map((alert) => (
         <AlertBox
           key={alert.id}
@@ -95,34 +97,41 @@ function App() {
           {alert.children}
         </AlertBox>
       ))}
+    </div>
 
+    <div className="card-grid">
       {users.map((user) => (
-        <UserProfileCard
-          key={user.id}
-          user={user}
-          showEmail
-          showRole
-          onEdit={() => handleEditUser(user.id)}
-        >
-          <div className="text-sm text-gray-500">
-            Last login: {Math.floor(Math.random() * 24) + 1} hours ago
-          </div>
-        </UserProfileCard>
-      ))}
-
-      {products.map((product) => (
-        <ProductDisplay
-          key={product.id}
-          product={product}
-          showDescription
-          showStockStatus
-          onAddToCart={product.inStock ? () => handleAddToCart(product.id) : undefined}
-        >
-          <div className="text-sm text-gray-500">Free shipping available</div>
-        </ProductDisplay>
+        <div className="card-item" key={user.id}>
+          <UserProfileCard
+            user={user}
+            showEmail
+            showRole
+            onEdit={() => handleEditUser(user.id)}
+          >
+            <div className="text-sm text-gray-500">
+              Last login: {Math.floor(Math.random() * 24) + 1} hours ago
+            </div>
+          </UserProfileCard>
+        </div>
       ))}
     </div>
-  );
+
+    <div className="card-grid">
+      {products.map((product) => (
+        <div className="card-item" key={product.id}>
+          <ProductDisplay
+            product={product}
+            showDescription
+            showStockStatus
+            onAddToCart={product.inStock ? () => handleAddToCart(product.id) : undefined}
+          >
+            <div className="text-sm text-gray-500">Free shipping available</div>
+          </ProductDisplay>
+        </div>
+      ))}
+    </div>
+  </div>
+);
 }
 
 export default App;

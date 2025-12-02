@@ -13,20 +13,19 @@
 html,
 body {
   margin: 0;
-  padding: 0;
-  font-family: var(--font-family);
-  font-size: 16px;
-  line-height: 1.5;
-  color: var(--color-text);
-  background-color: var(--color-bg);
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  min-width: 320px;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  background-color: #f0f0f0;
+  color: #242424;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
+.app-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  padding: 2rem;
 }
 
 a {
@@ -113,17 +112,19 @@ p {
 }
 
 .card {
-  border: 1px solid #374151;
+  outline: 2px solid #4f46e5;
+  outline-offset: 4px;
   border-radius: 0.5rem;
   padding: 1rem;
   background-color: #1f1f1f;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, outline-color 0.2s;
 }
 
 .card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  outline-color: #6366f1;
 }
 
 .card img {
