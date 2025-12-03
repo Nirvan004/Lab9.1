@@ -1,73 +1,67 @@
-# React + TypeScript + Vite
+This project implements a small reusable component library using **React**, **TypeScript**, and simple **CSS styling**.  
+Components include:
+alert box. user profile card and product display 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+All components are typed strictly using TypeScript interfaces and demonstrate component composition, optional props, and reusable UI patterns.
 
-Currently, two official plugins are available:
+AlertBox
+A dismissible alert used for showing Success, Error, Warning, or Info messages.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Props:
+ts
+type AlertType = "success" | "error" | "warning" | "info";
+interface AlertBoxProps {
+  type: AlertType;
+  message: string;
+  onClose?: () => void;
+  children?: React.ReactNode;
+}
 
-## React Compiler
+2. UserProfileCard
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Displays user information, including avatar, name, email, and role.
 
-## Expanding the ESLint configuration
+Props:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+interface UserProfileCardProps {
+  user: User;
+  showEmail?: boolean;
+  showRole?: boolean;
+  onEdit?: (userId: string) => void;
+  children?: React.ReactNode;
+}
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+3. ProductDisplay
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Displays product details in a reusable card format.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Props:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+interface ProductDisplayProps {
+  product: Product;
+  showDescription?: boolean;
+  showStockStatus?: boolean;
+  onAddToCart?: (productId: string) => void;
+  children?: React.ReactNode;
+}
+
+
+
+
+Reflection Questions
+How did you handle optional props in your components?
+What considerations did you make when designing the component interfaces?
+How did you ensure type safety across your components?
+What challenges did you face when implementing component composition?''
+
+1.For optional props I used "?" that is able to ensure that props can still be used if there is no value there
+
+2. My biggest consideration for the component interface was reuseability so it can be used again in different places as well as strong typing with things like user and email and product.
+
+3. Defining all typing helped ensure type safety especially while doing it in a dedicated type.ts file
+
+4. A lot of challenges i faced were mostly with knowing everything i needed to define and also ensuring things worked together. another big problem was importing types, for some reason importing stuff worked only partially and it was very frustrating trying to figure out what was getting imported and exported and why certain things werent or were working.
+
+
