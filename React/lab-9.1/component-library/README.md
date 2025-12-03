@@ -4,7 +4,7 @@ alert box. user profile card and product display
 
 All components are typed strictly using TypeScript interfaces and demonstrate component composition, optional props, and reusable UI patterns.
 
-AlertBox
+1. AlertBox
 A dismissible alert used for showing Success, Error, Warning, or Info messages.
 
 Props:
